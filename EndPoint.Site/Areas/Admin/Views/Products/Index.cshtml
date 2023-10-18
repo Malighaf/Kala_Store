@@ -93,10 +93,10 @@
     <script>
 
 
-        function DeleteUser(UserId) {
+        function DeleteUser(Id) {
             swal.fire({
                 title: 'حذف محصول',
-                text: "محصول گرامی از حذف محصول مطمئن هستید؟",
+                text: "  از حذف محصول مطمئن هستید؟",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
@@ -104,18 +104,20 @@
                 confirmButtonText: 'بله ، محصول حذف شود',
                 cancelButtonText: 'خیر'
             }).then((result) => {
+             
+
                 if (result.value) {
                     var postData = {
-                        'UserId': UserId,
+                        'Id': Id,
                     };
-
-                    $.ajax({
+                     $.ajax({
                         contentType: 'application/x-www-form-urlencoded',
                         dataType: 'json',
                         type: "POST",
                         url: "Delete",
                         data: postData,
                         success: function (data) {
+                               console.log('llllllll')
                             if (data.isSuccess == true) {
                                 swal.fire(
                                     'موفق!',
@@ -126,6 +128,7 @@
                                 });
                             }
                             else {
+                                                               console.log('888888888888')
 
                                 swal.fire(
                                     'هشدار!',
@@ -136,7 +139,7 @@
                             }
                         },
                         error: function (request, status, error) {
-                            alert(request.responseText);
+                            alert(request[0]);
                         }
 
                     });
@@ -150,11 +153,11 @@
 
         function Edituser() {
 
-            var userId = $("#Edit_UserId").val();
+            var Id = $("#Edit_UserId").val();
             var fullName = $("#Edit_Fullname").val();
             var email = $("#Edit_Email").val();
             var postData = {
-                'UserId': userId,
+                'Id': Id,
                 'Name': fullName,
                 'Brand': email,
             };
@@ -194,9 +197,9 @@
         }
 
 
-        function ShowModalEdituser(UserId, name, brand) {
+        function ShowModalEdituser(Id, name, brand) {
             $('#Edit_Fullname').val(name)
-            $('#Edit_UserId').val(UserId)
+            $('#Edit_UserId').val(Id)
             $('#Edit_Email').val(brand)
             $('#EditUser').modal('show');
 

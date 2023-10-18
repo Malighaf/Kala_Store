@@ -54,9 +54,9 @@ namespace EndPoint.Site.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(long UserId)
+        public IActionResult Delete(long Id)
         {
-            return Json(_productFacad.RemoveProductService.Execute(UserId));
+            return Json(_productFacad.RemoveProductService.Execute(Id));
         }
 
         [HttpPost]
