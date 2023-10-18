@@ -1,5 +1,6 @@
-﻿@using Bugeto_Store.Application.Services.Products.Queries.GetCategories;
-@model List<CategoriesDto>
+﻿@addTagHelper *, LazZiya.TagHelpers
+@using Bugeto_Store.Application.Services.Products.Queries.GetCategories;
+@model CategoriesDtoForAdminDto
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Adminlayout.cshtml";
@@ -36,7 +37,7 @@
                                             </thead>
                                             <tbody>
 
-                                                @foreach (var item in Model)
+                                                @foreach (var item in Model.catdtt)
                                                 {
                                                     <tr role="row" class="odd">
                                                         <td class="sorting_1">@item.Name</td>
@@ -72,9 +73,28 @@
                     </div>
                 </div>
             </div>
+                <div class="  text-center">
+                    sfdgsdfgsfgsdfgsdfg
+                    <paging total-records="Model.RowCount"
+                            page-no="Model.CurrentPage"
+                            page-size="Model.PageSize"
+                            show-prev-next="true"
+                            show-total-pages="false"
+                            show-total-records="false"
+                            show-page-size-nav="true"
+                            show-first-numbered-page="true"
+                            show-last-numbered-page="true"
+                            query-string-key-page-no="Page"
+                            query-string-key-page-size="PageSize"
+                            gap-size="2">
+                    </paging>
 
+                </div>
         </section>
     </div>
+
+
+
 </div>
 @*
 @section Scripts

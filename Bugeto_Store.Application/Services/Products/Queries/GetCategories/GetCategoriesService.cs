@@ -1,5 +1,7 @@
 ﻿using Bugeto_Store.Application.Interfaces.Contexts;
+using Bugeto_Store.Application.Services.Products.Queries.GetProductForAdmin;
 using Bugeto_Store.Common.Dto;
+using Bugeto_Store.Domain.Entities.Products;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +17,10 @@ namespace Bugeto_Store.Application.Services.Products.Queries.GetCategories
             _context = context;
         }
 
-        public ResultDto<List<CategoriesDto>> Execute(long? ParentId)
+        public ResultDto<CategoriesDtoForAdminDto> Execute(long? ParentId, int Page = 1, int PageSize = 20)
         {
+            int rowCount = 0;
+
             var categories = _context.Categories
                .Include(p => p.ParentCategory)
                .Include(p => p.SubCategories)
@@ -37,16 +41,21 @@ namespace Bugeto_Store.Application.Services.Products.Queries.GetCategories
                }).ToList();
 
 
-            return new ResultDto<List<CategoriesDto>>()
+            return new ResultDto<CategoriesDtoForAdminDto>()
             {
-                Data = categories,
+                Data = new CategoriesDtoForAdminDto()
+                {
+                    catdtt = categories,
+                    CurrentPage = Page,
+                    PageSize = PageSize,
+                    RowCount = rowCount
+                },
                 IsSuccess = true,
-                Message = "لیست باموقیت برگشت داده شد"
+                Message = "",
             };
-
         }
     }
-}
+    }
 
 
 

@@ -11,7 +11,7 @@ namespace Bugeto_Store.Application.Services.Products.Queries.GetAllCategories
 {
     public interface IGetAllCategoriesService
     {
-        ResultDto<List<AllCategoriesDto>> Execute();
+        ResultDto<List<AllCategoriesDto>> Execute(int Page = 1, int PageSize = 20);
     }
 
 
@@ -24,7 +24,7 @@ namespace Bugeto_Store.Application.Services.Products.Queries.GetAllCategories
             _context = context;
         }
 
-        public ResultDto<List<AllCategoriesDto>> Execute()
+        public ResultDto<List<AllCategoriesDto>> Execute(int Page = 1, int PageSize = 20)
         {
             var categories = _context
                 .Categories

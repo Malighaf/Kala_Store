@@ -1,6 +1,9 @@
 ﻿using Bugeto_Store.Application.Services.Products.Commands.AddNewCategory;
 using Bugeto_Store.Application.Services.Products.Commands.AddNewProduct;
 using Bugeto_Store.Application.Services.Products.Commands.DeleteCategory;
+using Bugeto_Store.Application.Services.Products.Commands.EditProduct;
+using Bugeto_Store.Application.Services.Products.Commands.RemovePrduct;
+using Bugeto_Store.Application.Services.Products.Commands.RemoveUser;
 using Bugeto_Store.Application.Services.Products.Queries.GetAllCategories;
 using Bugeto_Store.Application.Services.Products.Queries.GetCategories;
 using Bugeto_Store.Application.Services.Products.Queries.GetProductDetailForAdmin;
@@ -30,5 +33,8 @@ namespace Bugeto_Store.Application.Interfaces.FacadPatterns
         IGetProductDetailForAdminService GetProductDetailForAdminService { get; }
         IGetProductForSiteService GetProductForSiteService { get; }
         IGetProductDetailForSiteService GetProductDetailForSiteService { get; }
+        IEditProductService EditProductService { get; }
+        IRemoveProductService RemoveProductService { get; }
+
     }
 }

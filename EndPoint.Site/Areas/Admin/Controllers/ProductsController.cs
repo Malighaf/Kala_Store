@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bugeto_Store.Application.Interfaces.FacadPatterns;
 using Bugeto_Store.Application.Services.Products.Commands.AddNewProduct;
+using Bugeto_Store.Application.Services.Products.Commands.EditProduct;
+using Bugeto_Store.Application.Services.Users.Commands.EditUser;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -50,5 +52,23 @@ namespace EndPoint.Site.Areas.Admin.Controllers
             request.Features = Features;
             return Json(_productFacad.AddNewProductService.Execute(request));
         }
+
+        [HttpPost]
+        public IActionResult Delete(long UserId)
+        {
+            return Json(_productFacad.RemoveProductService.Execute(UserId));
+        }
+
+        [HttpPost]
+        public IActionResult Edit(long UserId, string name, string brand)
+        {
+            return Json(_productFacad.EditProductService.Execute(new RequestProductDto
+            {
+                name = name,
+                brand = brand,
+                UserId = UserId,
+            }));
+        }
+
     }
 }

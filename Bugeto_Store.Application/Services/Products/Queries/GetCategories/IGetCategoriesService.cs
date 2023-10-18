@@ -8,7 +8,7 @@ namespace Bugeto_Store.Application.Services.Products.Queries.GetCategories
 {
     public interface IGetCategoriesService
     {
-        ResultDto<List<CategoriesDto>> Execute(long? ParentId);
+        ResultDto<CategoriesDtoForAdminDto> Execute( long? ParentId, int Page = 1, int PageSize = 20);
     }
 }
 
