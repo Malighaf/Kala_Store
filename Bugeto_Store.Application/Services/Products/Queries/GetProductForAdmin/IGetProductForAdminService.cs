@@ -12,7 +12,7 @@ namespace Bugeto_Store.Application.Services.Products.Queries.GetProductForAdmin
 {
     public interface IGetProductForAdminService
     {
-        ResultDto<ProductForAdminDto> Execute(int Page = 1, int PageSize = 20);
+        ResultDto<ProductForAdminDto> Execute(string serchkey, int Page = 1, int PageSize = 20);
     }
 
     public class GetProductForAdminService : IGetProductForAdminService
@@ -23,10 +23,15 @@ namespace Bugeto_Store.Application.Services.Products.Queries.GetProductForAdmin
             _context = context;
         }
 
-        public ResultDto<ProductForAdminDto> Execute(int Page = 1, int PageSize = 20)
+        public ResultDto<ProductForAdminDto> Execute(string serchkey, int Page = 1, int PageSize = 20)
         {
             int rowCount = 0;
-            var products = _context.Products
+            var users = _context.Products.AsQueryable();
+            if (!string.IsNullOrWhiteSpace(serchkey))
+            {
+                users = users.Where(p => p.Brand.Contains(serchkey) || p.Name.Contains(serchkey));
+            }
+            var products = users
                 .Include(p => p.Category)
                 .ToPaged(Page, PageSize, out rowCount)
                 .Select(p => new ProductsFormAdminList_Dto

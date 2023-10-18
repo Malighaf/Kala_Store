@@ -22,9 +22,9 @@ namespace EndPoint.Site.Areas.Admin.Controllers
         {
             _productFacad = productFacad;
         }
-        public IActionResult Index(int Page = 1, int PageSize = 20)
+        public IActionResult Index(string serchkey,int Page = 1, int PageSize = 20)
         {
-            return View(_productFacad.GetProductForAdminService.Execute(Page, PageSize).Data);
+            return View(_productFacad.GetProductForAdminService.Execute(serchkey ,Page, PageSize).Data);
         }
 
         public IActionResult Detail(long Id)
